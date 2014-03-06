@@ -1,0 +1,56 @@
+<html>
+<head>
+	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script src="js/jquery.mousewheel-min.js"></script>
+    <script src="js/jquery.terminal-0.8.2.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="js/jquery.terminal.css" />
+
+<script>
+// init the neo4j console and start
+$(function() {
+	//
+	//uncomment following code to use a jquery ui dialog insteadof direcly embedding the console:
+	//
+	/*
+	// add as dialog
+	$("#neo4jConsole").dialog({
+		width : 577,
+		height : 403,
+		autoOpen: false,
+		resize: function(e, ui) {
+			var c = $(this);
+			$(this).data("terminal").resize(c.width(), c.height());
+		},
+		open: function(e, ui) {
+			if($(this).data("init")) 
+				$(this).data("terminal").enable();
+		},
+		close: function() {
+			if($(this).data("init")) 
+				$(this).data("terminal").disable();
+		},
+		closeOnEscape: false
+	});
+
+	// open the dialog and start the console
+	$("#neo4jConsole").dialog("open");
+	*/
+	var c = $("#neo4jConsole");
+	if(!c.data("init")) {
+		var term = c.append("<div/>").terminal("/ajax/console", {
+			prompt: '>', 
+			name: 'console',
+			greetings: "Start browsing in neo4j. For usage and commands type 'help'."
+		});
+		c.data("init", true);
+		$("#console").data("terminal", term);
+		c.css("background", "black");
+	}
+});
+</script>
+</head>
+<body>
+<!-- the dialog div for the console -->
+<div title="Data Console" id="neo4jConsole" style="height:100%"></div>
+</body>
+</html>
