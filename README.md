@@ -11,6 +11,15 @@ It allows traversing a neo4j tree by using command line parameters like:
 - cd [nodeId]
 - set ATTRIBUTE = value
 
+## Sorry, but why?
+Yes there is a neo4j rest api, and there already exists a console application. But both of them require pretty native access. In this case I want to enable remote-admin 
+without having to expose the whole db. I use the same connection, my applications use to access the database and can also include the console directly within the applicaiton
+to reuse the existing access control mechanism.
+
+It also allows to quickly debug an existing database while still in development. 
+
+I would strongly suggest NOT to use this in a live application because of possible security issues, the access through the servlet is after all pretty low level.
+
 # Requirements
 
 - spring-web: for access to access controller bean
